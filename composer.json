@@ -1,0 +1,10 @@
+{
+  "name": "dropsign/dropsign",
+  "description": "Drag-and-drop PDF cryptographic signer",
+  "require": {
+    "php": ">=7.4",
+    "tecnickcom/tcpdf": "^6.7",
+    "setasign/fpdi-tcpdf": "^2.3",
+    "vlucas/phpdotenv": "^5.6"
+  }
+}
