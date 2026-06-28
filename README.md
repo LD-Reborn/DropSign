@@ -109,3 +109,7 @@ server {
 3. The script imports each page of the original PDF using FPDI into TCPDF.
 4. TCPDF signs the new PDF with the configured certificate (PEM or PKCS#12).
 5. The signed PDF is downloaded as `signed_<original-name>.pdf`.
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md).
