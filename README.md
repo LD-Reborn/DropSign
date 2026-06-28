@@ -4,6 +4,8 @@ Drag & drop - cryptographically sign PDFs.
 
 A single-file PHP tool that digitally signs uploaded PDFs with an X.509 certificate and serves the signed PDF for download.
 
+> **Note:** DropSign is designed for **single-user use only** - e.g. on a personal server. It has no multi-user access control.
+
 ## Requirements
 
 - PHP ≥ 7.4 with extensions `openssl`, `gd`, `mbstring`
