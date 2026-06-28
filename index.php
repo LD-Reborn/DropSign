@@ -9,6 +9,35 @@ $dotenv->safeLoad();
 
 $basePath = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/');
 
+// ── HTTP Basic Auth ──
+$authUser = $_ENV['AUTH_USERNAME'] ?? '';
+$authPass = $_ENV['AUTH_PASSWORD'] ?? '';
+
+if ($authUser !== '' || $authPass !== '') {
+    if (!isset($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW'])) {
+        $authHeader = $_SERVER['HTTP_AUTHORIZATION']
+            ?? $_SERVER['REDIRECT_HTTP_AUTHORIZATION']
+            ?? '';
+        if (preg_match('/Basic\s+(.+)/i', $authHeader, $m)) {
+            $decoded = base64_decode($m[1], true);
+            if ($decoded !== false && str_contains($decoded, ':')) {
+                [$_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW']]
+                    = explode(':', $decoded, 2);
+            }
+        }
+    }
+
+    $valid = ($_SERVER['PHP_AUTH_USER'] ?? '') === $authUser
+           && ($_SERVER['PHP_AUTH_PW'] ?? '') === $authPass;
+
+    if (!$valid) {
+        header('WWW-Authenticate: Basic realm="DropSign"');
+        http_response_code(401);
+        echo json_encode(['error' => 'Authentication required']);
+        exit;
+    }
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     ?><!DOCTYPE html>
 <html lang="en">
