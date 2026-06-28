@@ -6,6 +6,11 @@ A single-file PHP tool that digitally signs uploaded PDFs with an X.509 certific
 
 > **Note:** DropSign is designed for **single-user use only** - e.g. on a personal server. It has no multi-user access control.
 
+## AI disclosure
+This code was co-authored by Big Pickle (opencode).
+
+Although manual testing shows that it works, it is imperative to properly configure nginx (or whatever reverse-proxy you use) to restrict access to only the `index.php` and the `.pdf` files. **Otherwise your private key might get leaked!**
+
 ## Requirements
 
 - PHP ≥ 7.4 with extensions `openssl`, `gd`, `mbstring`
